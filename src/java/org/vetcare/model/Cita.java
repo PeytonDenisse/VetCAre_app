@@ -7,16 +7,18 @@ public class Cita {
     private String motivo;
     private int idVeterinario;
     private int idPaciente;
+    private String status; // <--- NUEVO
 
     public Cita() {}
 
-    public Cita(int idCita, String fecha, String hora, String motivo, int idVeterinario, int idPaciente) {
+    public Cita(int idCita, String fecha, String hora, String motivo, int idVeterinario, int idPaciente, String status) {
         this.idCita = idCita;
         this.fecha = fecha;
         this.hora = hora;
         this.motivo = motivo;
         this.idVeterinario = idVeterinario;
         this.idPaciente = idPaciente;
+        this.status = status;
     }
 
     public int getIdCita() {
@@ -65,5 +67,13 @@ public class Cita {
 
     public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    public String getStatus() { 
+        return status; 
+    }
+
+    public void setStatus(String status) { 
+        this.status = status; 
     }
 }

@@ -33,8 +33,39 @@ public class RestInventario {
     public Response save(@FormParam("inventario") String inventarioJson) {
         Gson gson = new Gson();
         Inventario i = gson.fromJson(inventarioJson, Inventario.class);
+
         InventarioController ic = new InventarioController();
         ic.save(i);
+
         return Response.ok("{\"msg\":\"registro exitoso\"}").build();
+    }
+
+    // =============================================================
+    //                          UPDATE
+    // =============================================================
+    @Path("update")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("inventario") String inventarioJson) {
+        Gson gson = new Gson();
+        Inventario i = gson.fromJson(inventarioJson, Inventario.class);
+
+        InventarioController ic = new InventarioController();
+        ic.update(i);
+
+        return Response.ok("{\"msg\":\"inventario actualizado\"}").build();
+    }
+
+    // =============================================================
+    //                           DELETE
+    // =============================================================
+    @Path("delete/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        InventarioController ic = new InventarioController();
+        ic.delete(id);
+
+        return Response.ok("{\"msg\":\"item eliminado\"}").build();
     }
 }

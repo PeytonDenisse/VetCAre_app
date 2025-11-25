@@ -14,6 +14,7 @@ public class TratamientoController {
             Connection conn = cm.open();
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 Tratamiento t = new Tratamiento();
                 t.setIdTratamiento(rs.getInt("id_tratamiento"));
@@ -23,8 +24,14 @@ public class TratamientoController {
                 t.setIdPaciente(rs.getInt("id_paciente"));
                 list.add(t);
             }
-            rs.close(); ps.close(); cm.close(); conn.close();
+
+            rs.close();
+            ps.close();
+            cm.close();
+            conn.close();
+
         } catch (Exception e) { e.printStackTrace(); }
+
         return list;
     }
 
@@ -34,12 +41,65 @@ public class TratamientoController {
             ConexionMysql cm = new ConexionMysql();
             Connection conn = cm.open();
             PreparedStatement ps = conn.prepareStatement(q);
+
             ps.setString(1, t.getDescripcion());
             ps.setString(2, t.getTipo());
             ps.setString(3, t.getFecha());
             ps.setInt(4, t.getIdPaciente());
+
             ps.executeUpdate();
-            ps.close(); cm.close(); conn.close();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    // =============================================================
+    //                           UPDATE
+    // =============================================================
+    public void update(Tratamiento t) {
+        String q = "UPDATE tratamientos SET descripcion=?, tipo=?, fecha=?, id_paciente=? WHERE id_tratamiento=?";
+
+        try {
+            ConexionMysql cm = new ConexionMysql();
+            Connection conn = cm.open();
+            PreparedStatement ps = conn.prepareStatement(q);
+
+            ps.setString(1, t.getDescripcion());
+            ps.setString(2, t.getTipo());
+            ps.setString(3, t.getFecha());
+            ps.setInt(4, t.getIdPaciente());
+            ps.setInt(5, t.getIdTratamiento());
+
+            ps.executeUpdate();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    // =============================================================
+    //                           DELETE
+    // =============================================================
+    public void delete(int idTratamiento) {
+        String q = "DELETE FROM tratamientos WHERE id_tratamiento=?";
+
+        try {
+            ConexionMysql cm = new ConexionMysql();
+            Connection conn = cm.open();
+            PreparedStatement ps = conn.prepareStatement(q);
+
+            ps.setInt(1, idTratamiento);
+            ps.executeUpdate();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
         } catch (Exception e) { e.printStackTrace(); }
     }
 }
