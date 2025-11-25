@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/controller/ConexionMysql.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/RestControlAcceso.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/controller/ControlAccessoController.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/model/Paciente.java</file>
+            <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/CorsFilter.java</file>
+            <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/RestInventario.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/controller/CitaController.java</file>
+            <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/RestPaciente.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/RestCita.java</file>
+            <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/RestTratamiento.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/model/Facturacion.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/controller/PropietarioController.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/model/Cita.java</file>
@@ -19,6 +24,8 @@
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/model/ControlAcceso.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/model/Tratamiento.java</file>
             <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/controller/FacturacionController.java</file>
+            <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/RestFacturacion.java</file>
+            <file>file:/C:/Users/rommy/Documents/NetBeansProjects/VetCare/src/java/org/vetcare/rest/RestPropietario.java</file>
         </group>
     </open-files>
 </project-private>

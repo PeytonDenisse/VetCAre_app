@@ -33,8 +33,39 @@ public class RestFacturacion {
     public Response save(@FormParam("facturacion") String facturacionJson) {
         Gson gson = new Gson();
         Facturacion f = gson.fromJson(facturacionJson, Facturacion.class);
+
         FacturacionController fc = new FacturacionController();
         fc.save(f);
+
         return Response.ok("{\"msg\":\"registro exitoso\"}").build();
+    }
+
+    // =============================================================
+    //                       UPDATE (PUT)
+    // =============================================================
+    @Path("update")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("facturacion") String facturacionJson) {
+        Gson gson = new Gson();
+        Facturacion f = gson.fromJson(facturacionJson, Facturacion.class);
+
+        FacturacionController fc = new FacturacionController();
+        fc.update(f);
+
+        return Response.ok("{\"msg\":\"factura actualizada\"}").build();
+    }
+
+    // =============================================================
+    //                       DELETE (DELETE)
+    // =============================================================
+    @Path("delete/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        FacturacionController fc = new FacturacionController();
+        fc.delete(id);
+
+        return Response.ok("{\"msg\":\"factura eliminada\"}").build();
     }
 }

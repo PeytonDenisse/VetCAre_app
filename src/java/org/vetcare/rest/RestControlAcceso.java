@@ -1,15 +1,10 @@
 package org.vetcare.rest;
 
 import com.google.gson.Gson;
-import jakarta.ws.rs.FormParam;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
-
 
 import org.vetcare.controller.ControlAccessoController;
 import org.vetcare.model.ControlAcceso;
@@ -36,11 +31,42 @@ public class RestControlAcceso {
     @Path("save")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response save(@FormParam("controlAcceso") String controlAccesoJson) {
+    public Response save(@FormParam("controlAcceso") String json) {
         Gson gson = new Gson();
-        ControlAcceso u = gson.fromJson(controlAccesoJson, ControlAcceso.class);
+        ControlAcceso u = gson.fromJson(json, ControlAcceso.class);
+
         ControlAccessoController c = new ControlAccessoController();
         c.save(u);
+
         return Response.ok("{\"msg\":\"registro exitoso\"}").build();
+    }
+
+    // =============================================================
+    //                        UPDATE (PUT)
+    // =============================================================
+    @Path("update")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("controlAcceso") String json) {
+        Gson gson = new Gson();
+        ControlAcceso u = gson.fromJson(json, ControlAcceso.class);
+
+        ControlAccessoController c = new ControlAccessoController();
+        c.update(u);
+
+        return Response.ok("{\"msg\":\"usuario actualizado\"}").build();
+    }
+
+    // =============================================================
+    //                       DELETE (DELETE)
+    // =============================================================
+    @Path("delete/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        ControlAccessoController c = new ControlAccessoController();
+        c.delete(id);
+
+        return Response.ok("{\"msg\":\"usuario eliminado\"}").build();
     }
 }

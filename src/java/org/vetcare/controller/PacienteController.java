@@ -14,6 +14,7 @@ public class PacienteController {
             Connection conn = cm.open();
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 Paciente p = new Paciente();
                 p.setIdPaciente(rs.getInt("id_paciente"));
@@ -25,25 +26,87 @@ public class PacienteController {
                 p.setIdPropietario(rs.getInt("id_propietario"));
                 list.add(p);
             }
-            rs.close(); ps.close(); cm.close(); conn.close();
+
+            rs.close();
+            ps.close();
+            cm.close();
+            conn.close();
+
         } catch (Exception e) { e.printStackTrace(); }
+
         return list;
     }
 
     public void save(Paciente p) {
         String q = "INSERT INTO pacientes (nombre_mascota, especie, raza, edad, historial_medico, id_propietario) VALUES (?,?,?,?,?,?)";
+
         try {
             ConexionMysql cm = new ConexionMysql();
             Connection conn = cm.open();
             PreparedStatement ps = conn.prepareStatement(q);
+
             ps.setString(1, p.getNombreMascota());
             ps.setString(2, p.getEspecie());
             ps.setString(3, p.getRaza());
             ps.setInt(4, p.getEdad());
             ps.setString(5, p.getHistorialMedico());
             ps.setInt(6, p.getIdPropietario());
+
             ps.executeUpdate();
-            ps.close(); cm.close(); conn.close();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    // =============================================================
+    //                          UPDATE
+    // =============================================================
+    public void update(Paciente p) {
+        String q = "UPDATE pacientes SET nombre_mascota=?, especie=?, raza=?, edad=?, historial_medico=?, id_propietario=? WHERE id_paciente=?";
+
+        try {
+            ConexionMysql cm = new ConexionMysql();
+            Connection conn = cm.open();
+            PreparedStatement ps = conn.prepareStatement(q);
+
+            ps.setString(1, p.getNombreMascota());
+            ps.setString(2, p.getEspecie());
+            ps.setString(3, p.getRaza());
+            ps.setInt(4, p.getEdad());
+            ps.setString(5, p.getHistorialMedico());
+            ps.setInt(6, p.getIdPropietario());
+            ps.setInt(7, p.getIdPaciente());
+
+            ps.executeUpdate();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    // =============================================================
+    //                          DELETE
+    // =============================================================
+    public void delete(int idPaciente) {
+        String q = "DELETE FROM pacientes WHERE id_paciente=?";
+
+        try {
+            ConexionMysql cm = new ConexionMysql();
+            Connection conn = cm.open();
+            PreparedStatement ps = conn.prepareStatement(q);
+
+            ps.setInt(1, idPaciente);
+            ps.executeUpdate();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
         } catch (Exception e) { e.printStackTrace(); }
     }
 }

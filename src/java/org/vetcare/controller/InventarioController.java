@@ -9,11 +9,13 @@ public class InventarioController {
     public List<Inventario> getAll() {
         List<Inventario> list = new ArrayList<>();
         String query = "SELECT * FROM inventario";
+
         try {
             ConexionMysql cm = new ConexionMysql();
             Connection conn = cm.open();
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 Inventario i = new Inventario();
                 i.setIdItem(rs.getInt("id_item"));
@@ -23,23 +25,83 @@ public class InventarioController {
                 i.setFechaActualizacion(rs.getString("fecha_actualizacion"));
                 list.add(i);
             }
-            rs.close(); ps.close(); cm.close(); conn.close();
+
+            rs.close();
+            ps.close();
+            cm.close();
+            conn.close();
+
         } catch (Exception e) { e.printStackTrace(); }
+
         return list;
     }
 
     public void save(Inventario i) {
         String q = "INSERT INTO inventario (nombre_item, cantidad, categoria, fecha_actualizacion) VALUES (?,?,?,?)";
+
         try {
             ConexionMysql cm = new ConexionMysql();
             Connection conn = cm.open();
             PreparedStatement ps = conn.prepareStatement(q);
+
             ps.setString(1, i.getNombreItem());
             ps.setInt(2, i.getCantidad());
             ps.setString(3, i.getCategoria());
             ps.setString(4, i.getFechaActualizacion());
+
             ps.executeUpdate();
-            ps.close(); cm.close(); conn.close();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    // =============================================================
+    //                          UPDATE
+    // =============================================================
+    public void update(Inventario i) {
+        String q = "UPDATE inventario SET nombre_item=?, cantidad=?, categoria=?, fecha_actualizacion=? WHERE id_item=?";
+
+        try {
+            ConexionMysql cm = new ConexionMysql();
+            Connection conn = cm.open();
+            PreparedStatement ps = conn.prepareStatement(q);
+
+            ps.setString(1, i.getNombreItem());
+            ps.setInt(2, i.getCantidad());
+            ps.setString(3, i.getCategoria());
+            ps.setString(4, i.getFechaActualizacion());
+            ps.setInt(5, i.getIdItem());
+
+            ps.executeUpdate();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    // =============================================================
+    //                          DELETE
+    // =============================================================
+    public void delete(int idItem) {
+        String q = "DELETE FROM inventario WHERE id_item=?";
+
+        try {
+            ConexionMysql cm = new ConexionMysql();
+            Connection conn = cm.open();
+            PreparedStatement ps = conn.prepareStatement(q);
+
+            ps.setInt(1, idItem);
+            ps.executeUpdate();
+
+            ps.close();
+            cm.close();
+            conn.close();
+
         } catch (Exception e) { e.printStackTrace(); }
     }
 }

@@ -17,13 +17,16 @@ public class RestPropietario {
     public Response getAll() {
         String out;
         Gson gson = new Gson();
+
         try {
             PropietarioController pc = new PropietarioController();
             List<Propietario> list = pc.getAll();
             out = gson.toJson(list);
+
         } catch (Exception e) {
             out = String.format("{\"error\":\"%s\"}", e.getMessage());
         }
+
         return Response.ok(out).build();
     }
 
@@ -33,8 +36,39 @@ public class RestPropietario {
     public Response save(@FormParam("propietario") String propietarioJson) {
         Gson gson = new Gson();
         Propietario p = gson.fromJson(propietarioJson, Propietario.class);
+
         PropietarioController pc = new PropietarioController();
         pc.save(p);
+
         return Response.ok("{\"msg\":\"registro exitoso\"}").build();
+    }
+
+    // =============================================================
+    //                           UPDATE
+    // =============================================================
+    @Path("update")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("propietario") String propietarioJson) {
+        Gson gson = new Gson();
+        Propietario p = gson.fromJson(propietarioJson, Propietario.class);
+
+        PropietarioController pc = new PropietarioController();
+        pc.update(p);
+
+        return Response.ok("{\"msg\":\"propietario actualizado\"}").build();
+    }
+
+    // =============================================================
+    //                           DELETE
+    // =============================================================
+    @Path("delete/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        PropietarioController pc = new PropietarioController();
+        pc.delete(id);
+
+        return Response.ok("{\"msg\":\"propietario eliminado\"}").build();
     }
 }

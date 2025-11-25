@@ -33,8 +33,39 @@ public class RestPaciente {
     public Response save(@FormParam("paciente") String pacienteJson) {
         Gson gson = new Gson();
         Paciente p = gson.fromJson(pacienteJson, Paciente.class);
+
         PacienteController pc = new PacienteController();
         pc.save(p);
+
         return Response.ok("{\"msg\":\"registro exitoso\"}").build();
+    }
+
+    // =============================================================
+    //                          UPDATE
+    // =============================================================
+    @Path("update")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("paciente") String pacienteJson) {
+        Gson gson = new Gson();
+        Paciente p = gson.fromJson(pacienteJson, Paciente.class);
+
+        PacienteController pc = new PacienteController();
+        pc.update(p);
+
+        return Response.ok("{\"msg\":\"paciente actualizado\"}").build();
+    }
+
+    // =============================================================
+    //                          DELETE
+    // =============================================================
+    @Path("delete/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        PacienteController pc = new PacienteController();
+        pc.delete(id);
+
+        return Response.ok("{\"msg\":\"paciente eliminado\"}").build();
     }
 }

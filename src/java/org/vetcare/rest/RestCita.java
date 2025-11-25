@@ -37,4 +37,25 @@ public class RestCita {
         cc.save(c);
         return Response.ok("{\"msg\":\"registro exitoso\"}").build();
     }
+    
+    @Path("update")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("cita") String citaJson) {
+        Gson gson = new Gson();
+        Cita c = gson.fromJson(citaJson, Cita.class);
+        CitaController cc = new CitaController();
+        cc.update(c);
+        return Response.ok("{\"msg\":\"cita actualizada\"}").build();
+    }
+    @Path("delete/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        CitaController cc = new CitaController();
+        cc.delete(id);
+        return Response.ok("{\"msg\":\"cita eliminada\"}").build();
+}
+
+
 }
