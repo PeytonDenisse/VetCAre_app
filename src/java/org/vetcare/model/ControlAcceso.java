@@ -6,13 +6,20 @@ public class ControlAcceso {
     private String password;
     private String rol;
 
+    // 🔹 nuevos campos
+    private String email;
+    private boolean esGoogle;
+
     public ControlAcceso() {}
 
-    public ControlAcceso(int idUsuario, String nombreUsuario, String password, String rol) {
+    public ControlAcceso(int idUsuario, String nombreUsuario, String password,
+                         String rol, String email, boolean esGoogle) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.password = password;
         this.rol = rol;
+        this.email = email;
+        this.esGoogle = esGoogle;
     }
 
     public int getIdUsuario() {
@@ -45,5 +52,21 @@ public class ControlAcceso {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isEsGoogle() {
+        return esGoogle;
+    }
+
+    public void setEsGoogle(boolean esGoogle) {
+        this.esGoogle = esGoogle;
     }
 }
