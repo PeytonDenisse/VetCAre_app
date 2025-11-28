@@ -93,7 +93,7 @@ public class RestControlAcceso {
             if (user == null) {
                 user = new ControlAcceso();
                 user.setNombreUsuario(email);   // puedes luego cambiarlo por displayName
-                user.setPassword(null);
+                user.setPassword("");
                 user.setRol("veterinario");     // rol default
                 user.setEmail(email);
                 user.setEsGoogle(true);
